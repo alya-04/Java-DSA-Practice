@@ -1,0 +1,33 @@
+/*
+LeetCode #383 - Ransom Note
+
+Approach:
+1. Count the frequency of each character in the magazine using a HashMap.
+2. Traverse the ransom note.
+3. If a character is not present or its frequency is 0, return false.
+4. Otherwise, decrease its frequency by 1.
+5. If all characters are successfully matched, return true.
+
+Time Complexity: O(m + n)
+Space Complexity: O(k)
+*/
+
+import java.util.HashMap;
+
+class Solution {
+    public boolean canConstruct(String ransomNote, String magazine) {
+        HashMap<Character, Integer> name = new HashMap<>();
+        
+        for(char c : magazine.toCharArray()){
+            name.put(c, name.getOrDefault(c,0)+1);
+        }
+
+        for(char c : ransomNote.toCharArray()){
+            if (!name.containsKey(c) || name.get(c) == 0) { 
+                return false;
+            }
+            name.put(c, name.get(c) - 1);
+        }
+        return true;
+    }
+}  
